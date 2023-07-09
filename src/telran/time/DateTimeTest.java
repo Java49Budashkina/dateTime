@@ -4,10 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import java.time.*;
-import java.time.chrono.ChronoZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.UnsupportedTemporalTypeException;
+
 
 class DateTimeTest {
 
@@ -39,16 +39,16 @@ class DateTimeTest {
 	
 	@Test
 	void tempCanadaZoneTest() {
-	//	ZoneId.getAvailableZoneIds().forEach(System.out::println);
-		displayCurrentTime("canada");
-		//ZoneRulesException
+		DateTimeFormatter dt = DateTimeFormatter.ofPattern("dd-MM-YY hh:mm:ss  VV");
+		displayCurrentTime("Canada", dt);
 	}
-	void displayCurrentTime(String zoneName) {
+	
+	void displayCurrentTime(String zoneName, DateTimeFormatter dt) {
 		ZonedDateTime zdt =  ZonedDateTime.now();
 		ZoneId.getAvailableZoneIds().stream()
 						.filter(zone -> zone.toLowerCase().contains(zoneName.toLowerCase()))
 						.map(zone -> zdt.withZoneSameInstant( ZoneId.of(zone)))
-						.forEach(System.out::println);//(dt -> displayCurrentTime(dt));
+						.forEach(zone -> System.out.println( zone.format(dt)));
 				
 	}
 }

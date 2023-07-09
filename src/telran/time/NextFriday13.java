@@ -11,7 +11,8 @@ public class NextFriday13 implements TemporalAdjuster {
 	@Override
 	public Temporal adjustInto(Temporal temporal) {
 		Temporal res = temporal;
-		boolean good = res.isSupported(ChronoUnit.YEARS) && res.isSupported(ChronoUnit.MONTHS) && res.isSupported(ChronoUnit.DAYS);
+		boolean good = res.isSupported(ChronoField.DAY_OF_MONTH) && res.isSupported(ChronoUnit.MONTHS) 
+				&& res.isSupported(ChronoField.DAY_OF_WEEK);
 		if(!good)
 			throw new UnsupportedTemporalTypeException("wrong format");
 		res = next13(res);
